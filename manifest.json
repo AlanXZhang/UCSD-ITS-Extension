@@ -1,0 +1,26 @@
+{
+  "name": "ITS Extension",
+  "description": "Lets you easily copy code for DSA lookup table to paste into SNOW; Ctrl + q/Cmd + K for Links",
+  "version": "1.0",
+  "manifest_version": 3,
+  "icons": {
+    "128": "Bongo_Logo.png"
+  },
+  "web_accessible_resources": [{
+    "resources": ["copy.png"],
+    "matches": ["http://*/*", "https://*/*"]
+  }],
+  "content_scripts": [{
+      "css": ["dsaStyles.css"],
+      "js": ["dsaSearch.js"],
+      "matches": [
+        "https://iam.ucsd.edu/dsasearch/dsaSearchByEmail*",
+        "https://iam.ucsd.edu/dsasearch/deptList*"
+      ]
+    },
+    {
+      "js": ["snowLink.js"],
+      "matches": ["https://support.ucsd.edu/*", "https://snqa.ucsd.edu/*"]
+    }
+  ]
+}
