@@ -11,7 +11,6 @@ function listen() {
     } else if (isMac) {
       functionKey = event.metaKey;
     }
-    console.log(`functionKey ${functionKey} and ${event.key} pressed`)
     if ( // HyperLink the highlighted text or add a hyperlink eelement
       (isWindows && event.ctrlKey && event.key === 'q') ||
       (isMac && event.metaKey && event.key === 'k')
@@ -68,7 +67,6 @@ function editHighlighted(style) {
       imgTag +
       textArea.value.substring(end,len)
     );
-    // console.log(len, textArea.value.indexOf("[/code]"), imgTag.indexOf("\""))
     textArea.selectionEnd = end-start > 0 ? start + imgTag.length : start + imgTag.indexOf("\"") + 1
   }
   else {
