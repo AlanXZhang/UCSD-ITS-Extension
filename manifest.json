@@ -14,6 +14,7 @@
       "css": ["dsaStyles.css"],
       "js": ["dsaSearch.js"],
       "matches": [
+        "https://iam.ucsd.edu/dsasearch/",
         "https://iam.ucsd.edu/dsasearch/dsaSearchByEmail*",
         "https://iam.ucsd.edu/dsasearch/deptList*"
       ]
