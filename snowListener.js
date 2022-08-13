@@ -1,5 +1,5 @@
 function editHighlighted(style) {
-  var doc = document.getElementById("gsft_main").contentWindow.document ?? document;
+  var doc = document.getElementById("gsft_main")?.contentWindow?.document ?? document;
 
   var selection = doc.getSelection();
   if (selection.focusNode !== selection.anchorNode) return;
