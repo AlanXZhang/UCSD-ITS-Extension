@@ -4,8 +4,7 @@
   "version": "1.1",
   "manifest_version": 3,
   "permissions": [
-    "scripting",
-    "tabs"
+    "scripting"
   ],
   "host_permissions": [
     "https://support.ucsd.edu/*",
