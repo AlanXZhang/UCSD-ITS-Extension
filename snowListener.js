@@ -16,18 +16,18 @@ function editHighlighted(style) {
 
     if (style === "hyperlink") {
         startCode = '[code]<a href="">';
-        endCode = "</a>[/code] ";
+        endCode = "</a>[/code]";
         selectionEnd = start + startCode.indexOf('"') + 1;
     } else if (style === "bold") {
         startCode = "[code]<b>";
-        endCode = "</b>[/code] ";
+        endCode = "</b>[/code]";
         selectionEnd =
             end - start > 0
                 ? end + startCode.length + endCode.length - 1
                 : start + startCode.length;
     } else if (style === "image") {
         startCode = `[code]<img src="`;
-        endCode = `" width=600px />[/code] `;
+        endCode = `" width=600px />[/code]`;
         selectionEnd =
             end - start > 0
                 ? end + startCode.length + endCode.length - 1
