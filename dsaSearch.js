@@ -10,7 +10,7 @@ function setupButtons() {
     button.onclick = function (e) {
       var clipboardString = e.target.parentElement.outerHTML;
       clipboardString = clipboardString.replace(/ {4}|[\t\n\r]/gm, '');
-      navigator.clipboard.writeText(`[code]${clipboardString}[/code]`);
+      navigator.clipboard.writeText(`[code]${clipboardString}<style>th {background-color: #eee;}td,th {border: 1px solid #ccc;}</style>[/code]`);
     };
 
     button.setAttribute("style", "display:none");

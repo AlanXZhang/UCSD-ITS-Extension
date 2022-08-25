@@ -1,6 +1,6 @@
 {
-  "name": "ITS Extension",
-  "description": "Copy DSA tables from DSA Search and format links, images, and bold text",
+  "name": "ITS Helper",
+  "description": "Copy DSA tables; rich text hotkeys",
   "version": "1.1",
   "manifest_version": 3,
   "permissions": [
