@@ -33,12 +33,13 @@ function editHighlighted(style) {
                 ? end + startCode.length + endCode.length - 1
                 : start + startCode.length;
     }
-
+    var optionalSpace = " " if textArea.value.charAt(textArea.value.length-1) === " " else ""
     textArea.value =
         textArea.value.substring(0, start) +
         startCode +
         textArea.value.substring(start, end).trim() +
         endCode +
+        optionalSpace + 
         textArea.value.substring(end, len);
     textArea.selectionEnd = selectionEnd;
 }
