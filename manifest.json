@@ -6,6 +6,9 @@
   "permissions": [
     "scripting"
   ],
+  "action": {
+    "default_popup": "popup.html"
+  },
   "host_permissions": [
     "https://support.ucsd.edu/*",
     "https://snqa.ucsd.edu/*"
