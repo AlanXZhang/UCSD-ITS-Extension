@@ -11,6 +11,7 @@ function editHighlighted(style) {
     var len = textArea.value.length;
     var start = textArea.selectionStart;
     var end = textArea.selectionEnd;
+    var optionalSpace = textArea.value.charAt(textArea.value.length-1) === " " ? " " : ""
 
     var startCode, endCode, selectionEnd;
 
@@ -19,27 +20,26 @@ function editHighlighted(style) {
         endCode = "</a>[/code]";
         selectionEnd = start + startCode.indexOf('"') + 1;
     } else if (style === "bold") {
-        startCode = "[code]<b>";
-        endCode = "</b>[/code]";
+        startCode = "[code]<strong>";
+        endCode = "</strong>[/code]";
         selectionEnd =
             end - start > 0
-                ? end + startCode.length + endCode.length - 1
+                ? end + startCode.length + endCode.length
                 : start + startCode.length;
     } else if (style === "image") {
         startCode = `[code]<img src="`;
         endCode = `" width=600px />[/code]`;
         selectionEnd =
             end - start > 0
-                ? end + startCode.length + endCode.length - 1
+                ? end + startCode.length + endCode.length
                 : start + startCode.length;
     }
-    var optionalSpace = " " if textArea.value.charAt(textArea.value.length-1) === " " else ""
     textArea.value =
         textArea.value.substring(0, start) +
         startCode +
         textArea.value.substring(start, end).trim() +
         endCode +
-        optionalSpace + 
+        optionalSpace +
         textArea.value.substring(end, len);
     textArea.selectionEnd = selectionEnd;
 }
