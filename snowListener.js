@@ -11,8 +11,8 @@ function editHighlighted(style) {
     var len = textArea.value.length;
     var start = textArea.selectionStart;
     var end = textArea.selectionEnd;
-    var optionalSpace = textArea.value.charAt(textArea.value.length-1) === " " ? " " : ""
-
+    var lastChar = textArea.value.substring(end-1,end) === " "
+    var optionalSpace = lastChar ? " " : ""
     var startCode, endCode, selectionEnd;
 
     if (style === "hyperlink") {
