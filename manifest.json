@@ -1,7 +1,7 @@
 {
   "name": "ITS Helper",
   "description": "Copy DSA tables; rich text hotkeys",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "manifest_version": 3,
   "permissions": [
     "scripting"
