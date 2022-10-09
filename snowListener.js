@@ -19,6 +19,10 @@ function editHighlighted(style) {
         startCode = '[code]<a href="">';
         endCode = "</a>[/code]";
         selectionEnd = start + startCode.indexOf('"') + 1;
+    } else if (style === "miniHyperlink") {
+        startCode = '<a href="">';
+        endCode = "</a>";
+        selectionEnd = start + startCode.indexOf('"') + 1;
     } else if (style === "bold") {
         startCode = "[code]<strong>";
         endCode = "</strong>[/code]";
@@ -33,6 +37,28 @@ function editHighlighted(style) {
             end - start > 0
                 ? end + startCode.length + endCode.length
                 : start + startCode.length;
+    } else if (style === "miniImage") {
+        startCode = `<img src="`;
+        endCode = `" width=600px />`;
+        selectionEnd =
+            end - start > 0
+                ? end + startCode.length + endCode.length
+                : start + startCode.length;
+    } else if (style === "orderedList") {
+        startCode = `[code]\n<ol>\n    <li>\n`;
+        endCode = `\n    </li>\n    <li>\n\n    </li>\n    <li>\n\n    </li>\n</ol>\n[/code]`;
+        selectionEnd =
+            end - start > 0
+                ? end + startCode.length + endCode.length
+                : start + startCode.length;
+    } else if (style === "unorderedList") {
+      startCode = `[code]\n<ul>\n    <li>\n`;
+      endCode = `\n    </li>\n    <li>\n\n    </li>\n    <li>\n\n    </li>\n</ul>\n[/code]`;
+      selectionEnd =
+          end - start > 0
+              ? end + startCode.length + endCode.length
+              : start + startCode.length;
+
     }
     textArea.value =
         textArea.value.substring(0, start) +
