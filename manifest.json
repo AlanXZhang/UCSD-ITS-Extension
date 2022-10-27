@@ -29,18 +29,26 @@
     "service_worker": "snowListener.js"
   },
   "content_scripts": [{
-    "css": [
-      "dsaStyles.css"
-    ],
-    "js": [
-      "dsaSearch.js"
-    ],
-    "matches": [
-      "https://iam.ucsd.edu/dsasearch/",
-      "https://iam.ucsd.edu/dsasearch/dsaSearchByEmail*",
-      "https://iam.ucsd.edu/dsasearch/deptList*"
-    ]
-  }],
+      "css": [
+        "dsaStyles.css"
+      ],
+      "js": [
+        "dsaSearch.js"
+      ],
+      "matches": [
+        "https://iam.ucsd.edu/dsasearch/",
+        "https://iam.ucsd.edu/dsasearch/dsaSearchByEmail*",
+        "https://iam.ucsd.edu/dsasearch/deptList*"
+      ]
+    },
+    {
+      "js":["snowCollapse.js"],
+      "matches":[
+        "https://support.ucsd.edu/*"
+      ],
+      "all_frames":true
+    }
+  ],
   "commands": {
     "hyperlink": {
       "description": "Formats text as a hyperlink",
