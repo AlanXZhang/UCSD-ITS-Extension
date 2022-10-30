@@ -1,7 +1,7 @@
 {
-  "name": "ITS Helper Enhanced",
-  "description": "Copy DSA tables; rich text hotkeys",
-  "version": "1.1.4",
+  "name": "ITS Helper",
+  "description": "Copy DSA tables; rich text hotkeys; collapse SNOW email quotes",
+  "version": "1.2.0",
   "manifest_version": 3,
   "permissions": [
     "scripting"
@@ -44,7 +44,8 @@
     {
       "js":["snowCollapse.js"],
       "matches":[
-        "https://support.ucsd.edu/*"
+        "https://support.ucsd.edu/*",
+        "https://snqa.ucsd.edu/*"
       ],
       "all_frames":true
     }
@@ -63,6 +64,9 @@
     "bold": {
       "description": "Formats text as bold",
       "suggested_key": "Ctrl+B"
+    },
+    "italic": {
+      "description": "Formats text as italic"
     },
     "image": {
       "description": "Formats link as an image",

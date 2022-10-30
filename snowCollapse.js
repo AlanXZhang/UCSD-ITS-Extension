@@ -11,7 +11,7 @@
     textBlocks.forEach((block) => {
       var lines = block.innerHTML.split("<br>"),
         collections = [],
-        i = 0
+        i = -1
       lines.forEach((line) => {
         if (line.trim().slice(0, 4) == '&gt;') {
           if (collections[i] == undefined) {
@@ -24,10 +24,11 @@
           collections[i].push(line)
         }
       });
-      block.innerHTML = collections.map(
-        (collection) => collection.length == 1 ? collection[0] :
-        "<details><summary>Collapsed Quote</summary>" +
-        "<p>" + collection.join("</p><p>") + "</p></details>").join('<br>')
+
+      block.innerHTML = collections.filter((collection) => collection.length >= 1).map(
+        (collection) => collection.length === 1 ? collection[0] :
+        "<blockquote style='font-size: 12px'><details><summary style='text-decoration:underline; cursor:pointer'>Collapsed Quote</summary>" +
+        "<p>" + collection.join("</p><p>") + "</p></details></blockquote>").join('<br>');
     })
   }
 
