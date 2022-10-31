@@ -1,7 +1,7 @@
 {
   "name": "ITS Helper",
-  "description": "Copy DSA tables; rich text hotkeys",
-  "version": "1.1.4",
+  "description": "Copy DSA tables; rich text hotkeys; collapse SNOW email quotes",
+  "version": "1.2.0",
   "manifest_version": 3,
   "permissions": [
     "scripting"
@@ -16,22 +16,19 @@
   "icons": {
     "128": "resnet_logo.png"
   },
-  "web_accessible_resources": [
-    {
-      "resources": [
-        "copy.png"
-      ],
-      "matches": [
-        "http://*/*",
-        "https://*/*"
-      ]
-    }
-  ],
+  "web_accessible_resources": [{
+    "resources": [
+      "copy.png"
+    ],
+    "matches": [
+      "http://*.ucsd.edu/*",
+      "https://*.ucsd.edu/*"
+    ]
+  }],
   "background": {
     "service_worker": "snowListener.js"
   },
-  "content_scripts": [
-    {
+  "content_scripts": [{
       "css": [
         "dsaStyles.css"
       ],
@@ -43,6 +40,14 @@
         "https://iam.ucsd.edu/dsasearch/dsaSearchByEmail*",
         "https://iam.ucsd.edu/dsasearch/deptList*"
       ]
+    },
+    {
+      "js":["snowCollapse.js"],
+      "matches":[
+        "https://support.ucsd.edu/*",
+        "https://snqa.ucsd.edu/*"
+      ],
+      "all_frames":true
     }
   ],
   "commands": {
@@ -53,13 +58,28 @@
         "mac": "Command+K"
       }
     },
+    "miniHyperlink": {
+      "description": "Formats text as a hyperlink without placing in [code] tags"
+    },
     "bold": {
       "description": "Formats text as bold",
       "suggested_key": "Ctrl+B"
     },
+    "italic": {
+      "description": "Formats text as italic"
+    },
     "image": {
       "description": "Formats link as an image",
       "suggested_key": "Ctrl+I"
+    },
+    "miniImage": {
+      "description": "Formats link as an image without placing in [code] tags"
+    },
+    "unorderedList": {
+      "description": "Creates an unordered list"
+    },
+    "orderedList": {
+      "description": "Creates an ordered list"
     }
   }
 }
