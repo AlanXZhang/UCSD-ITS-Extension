@@ -80,6 +80,18 @@
     },
     "orderedList": {
       "description": "Creates an ordered list"
+    },
+    "code":{
+      "description": "Adds a <code></code> block"
+    },
+    "blockquote":{
+      "description": "Adds a <blockquote></blockquote> block"
+    },
+    "listItem":{
+      "description": "Adds a <li></li> element without placing it in [code] tags"
+    },
+    "miniCode":{
+      "description": "Adds a <code></code> element without placing it in [code] tags"
     }
   }
 }
