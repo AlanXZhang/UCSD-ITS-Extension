@@ -11,7 +11,6 @@
     textBlocks.forEach((block) => {
       var lines = block.innerHTML.split("<br>"),
         outputText = "",
-        i = -1,
         inCollection = false;
       lines.forEach((line) => {
         if (inCollection) {
