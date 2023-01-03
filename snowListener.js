@@ -14,7 +14,8 @@
     var end = textArea.selectionEnd;
     var lastChar = textArea.value.substring(end - 1, end) === " "
     var optionalSpace = lastChar ? " " : ""
-    var startCode, endCode, selectionEnd = -1;
+    var startCode, endCode;
+    var selectionEnd = -1;
 
     if (style === "hyperlink") {
       startCode = '[code]<a href="">';
