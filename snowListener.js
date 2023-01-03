@@ -14,11 +14,12 @@
     var end = textArea.selectionEnd;
     var lastChar = textArea.value.substring(end - 1, end) === " "
     var optionalSpace = lastChar ? " " : ""
-    var startCode, endCode, selectionEnd;
+    var startCode, endCode, selectionEnd = -1;
 
     if (style === "hyperlink") {
-      startCode = '[code]<a href="';
-      endCode = '"></a>[/code]';
+      startCode = '[code]<a href="">';
+      endCode = '</a>[/code]';
+      selectionEnd = start + startCode.indexOf('"') + 1;
     } else if (style === "miniHyperlink") {
       startCode = '<a href="';
       endCode = '"></a>';
@@ -43,7 +44,7 @@
     } else if (style === "code") {
       startCode = "[code]<code style='display: inline-block; border: 0.5px solid #BBBBBB; border-radius: 1px; background-color: #E5E5E5; padding: 5px; margin-left: 3px; margin-right: 2px;'>";
       endCode = "</code>[/code]";
-    }  else if (style === "miniCode") {
+    } else if (style === "miniCode") {
       startCode = "<code style='display: inline-block; border: 0.5px solid #BBBBBB; border-radius: 1px; background-color: #E5E5E5; padding: 5px; margin-left: 3px; margin-right: 2px;'>";
       endCode = "</code>";
     } else if (style === "blockquote") {
@@ -53,10 +54,12 @@
       startCode = "<li>\n";
       endCode = "\n</li>";
     }
-    selectionEnd =
-      end - start > 0 ?
-      end + startCode.length + endCode.length :
-      start + startCode.length;
+    if (selectionEnd === -1) {
+      selectionEnd =
+        end - start > 0 ?
+        end + startCode.length + endCode.length :
+        start + startCode.length;
+    }
     textArea.value =
       textArea.value.substring(0, start) +
       startCode +
