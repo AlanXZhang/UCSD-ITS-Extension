@@ -5,7 +5,7 @@
       document;
 
     var selection = doc.getSelection();
-    if (selection.focusNode !== selection.anchorNode) return;
+    if (selection.focusNode !== selection.anchorNode || selection.focusNode === null) return;
 
     var textArea = selection.focusNode.querySelector("textarea");
 
@@ -58,18 +58,18 @@
     if (selectionEnd === -1) {
       selectionEnd =
         end - start > 0 ?
-        end + startCode.length + endCode.length :
-        start + startCode.length;
+          end + startCode.length + endCode.length :
+          start + startCode.length;
     }
-    textArea.value =
-      textArea.value.substring(0, start) +
-      startCode +
+    const insertedText = startCode +
       textArea.value.substring(start, end).trim() +
       endCode +
-      optionalSpace +
-      textArea.value.substring(end, len);
-    textArea.blur()
-    textArea.focus()
+      optionalSpace;
+    doc.execCommand("insertText", false, insertedText);
+    setTimeout(() => {
+      textArea.blur()
+      textArea.focus()
+    }, 10);
     textArea.selectionEnd = selectionEnd;
   };
 
@@ -80,9 +80,8 @@
       (!tab.url.startsWith("https://support.ucsd.edu/") &&
         !tab.url.startsWith("https://snqa.ucsd.edu/"))
     ) {
-      return;
+      return true;
     }
-
     chrome.scripting.executeScript({
       target: {
         tabId: tab.id
@@ -90,5 +89,6 @@
       function: editHighlighted,
       args: [command],
     });
+    return true;
   });
 })();

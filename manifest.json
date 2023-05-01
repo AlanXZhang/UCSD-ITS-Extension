@@ -1,7 +1,7 @@
 {
   "name": "ITS Helper",
   "description": "Copy DSA tables; rich text hotkeys; collapse SNOW email quotes",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "manifest_version": 3,
   "permissions": [
     "scripting"
@@ -16,19 +16,22 @@
   "icons": {
     "128": "resnet_logo.png"
   },
-  "web_accessible_resources": [{
-    "resources": [
-      "copy.png"
-    ],
-    "matches": [
-      "http://*.ucsd.edu/*",
-      "https://*.ucsd.edu/*"
-    ]
-  }],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "copy.png"
+      ],
+      "matches": [
+        "http://*.ucsd.edu/*",
+        "https://*.ucsd.edu/*"
+      ]
+    }
+  ],
   "background": {
     "service_worker": "snowListener.js"
   },
-  "content_scripts": [{
+  "content_scripts": [
+    {
       "css": [
         "dsaStyles.css"
       ],
@@ -42,12 +45,14 @@
       ]
     },
     {
-      "js":["snowCollapse.js"],
-      "matches":[
+      "js": [
+        "snowCollapse.js"
+      ],
+      "matches": [
         "https://support.ucsd.edu/*",
         "https://snqa.ucsd.edu/*"
       ],
-      "all_frames":true
+      "all_frames": true
     }
   ],
   "commands": {
@@ -81,17 +86,17 @@
     "orderedList": {
       "description": "Creates an ordered list"
     },
-    "code":{
-      "description": "Adds a <code></code> block"
+    "code": {
+      "description": "Adds a styled code block"
     },
-    "blockquote":{
-      "description": "Adds a <blockquote></blockquote> block"
+    "blockquote": {
+      "description": "Adds a styled blockquote block"
     },
-    "listItem":{
-      "description": "Adds a <li></li> element without placing it in [code] tags"
+    "listItem": {
+      "description": "Adds a list item element without placing it in [code] tags"
     },
-    "miniCode":{
-      "description": "Adds a <code></code> element without placing it in [code] tags"
+    "miniCode": {
+      "description": "Adds a styled code block without placing it in [code] tags"
     }
   }
 }
