@@ -18,7 +18,7 @@
     var selectionEnd = -1;
 
     if (style === "hyperlink") {
-      startCode = '[code]<a href="">';
+      startCode = '[code]<a href="" target="_blank">';
       endCode = '</a>[/code]';
       selectionEnd = start + startCode.indexOf('"') + 1;
     } else if (style === "miniHyperlink") {
