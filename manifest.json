@@ -1,7 +1,7 @@
 {
   "name": "ITS Helper",
   "description": "Copy DSA tables; rich text hotkeys; collapse SNOW email quotes",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "manifest_version": 3,
   "permissions": [
     "scripting"
