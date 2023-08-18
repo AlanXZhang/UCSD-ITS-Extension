@@ -1,7 +1,7 @@
 {
   "name": "ITS Helper",
   "description": "Copy DSA tables; rich text hotkeys; collapse SNOW email quotes",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "manifest_version": 3,
   "permissions": [
     "scripting"
@@ -63,9 +63,6 @@
         "mac": "Command+K"
       }
     },
-    "miniHyperlink": {
-      "description": "Formats text as a hyperlink without placing in [code] tags"
-    },
     "bold": {
       "description": "Formats text as bold",
       "suggested_key": "Ctrl+B"
@@ -76,9 +73,6 @@
     "image": {
       "description": "Formats link as an image",
       "suggested_key": "Ctrl+I"
-    },
-    "miniImage": {
-      "description": "Formats link as an image without placing in [code] tags"
     },
     "unorderedList": {
       "description": "Creates an unordered list"
@@ -94,9 +88,6 @@
     },
     "listItem": {
       "description": "Adds a list item element without placing it in [code] tags"
-    },
-    "miniCode": {
-      "description": "Adds a styled code block without placing it in [code] tags"
     }
   }
 }
