@@ -1,61 +1,72 @@
 (() => {
-  var editHighlighted = (style) => {
-    var doc =
-      document.getElementById("gsft_main")?.contentWindow?.document ??
-      document;
+  editHighlighted = (command) => {
 
-    var selection = doc.getSelection();
-    if (selection.focusNode !== selection.anchorNode || selection.focusNode === null) return;
+    const replacements = {
+      hyperlink: (() => {
+        const startCode = '[code]<a href="" target="_blank">';
+        return {
+          startCode: startCode,
+          endCode: '</a>[/code]',
+          selectionEnd: startCode.indexOf('"') + 1
+        };
+      })(),
+      bold: {
+        startCode: "[code]<b>",
+        endCode: "</b>[/code]"
+      },
+      italic: {
+        startCode: "[code]<i>",
+        endCode: "</i>[/code]"
+      },
+      image: {
+        startCode: `[code]<img src="`,
+        endCode: `" width=600px />[/code]`
+      },
+      orderedList: {
+        startCode: "[code]\n<ol>\n<li>\n",
+        endCode: "\n</li>\n</ol>\n[/code]"
+      },
+      unorderedList: {
+        startCode: "[code]\n<ul>\n<li>\n",
+        endCode: "\n</li>\n</ul>\n[/code]"
+      },
+      code: {
+        startCode: "[code]<code style='display: inline-block; border: 0.5px solid #BBBBBB; border-radius: 1px; background-color: #E5E5E5; padding: 5px; margin-left: 3px; margin-right: 2px;'>",
+        endCode: "</code>[/code]"
+      },
+      blockquote: {
+        startCode: "[code]<blockquote style='border-left: 3px solid #00629B; padding: 1em;'>\n[/code]",
+        endCode: "[code]\n</blockquote>[/code]"
+      },
+      listItem: {
+        startCode: "<li>\n",
+        endCode: "\n</li>"
+      }
+    }, doc =
+        document.getElementById("gsft_main")?.contentWindow?.document ??
+        document,
+      selection = doc.getSelection();
 
-    var textArea = selection.focusNode.querySelector("textarea");
+    if (selection.focusNode !== selection.anchorNode || selection.focusNode === null || !selection.focusNode.querySelector("textarea,input")) return;
 
-    var len = textArea.value.length;
-    var start = textArea.selectionStart;
-    var end = textArea.selectionEnd;
-    var lastChar = textArea.value.substring(end - 1, end) === " "
-    var optionalSpace = lastChar ? " " : ""
-    var startCode, endCode;
-    var selectionEnd = -1;
+    const textArea = selection.focusNode.querySelector("textarea,input"),
+      start = textArea.selectionStart,
+      end = textArea.selectionEnd,
+      lastChar = textArea.value.substring(end - 1, end) === " ",
+      optionalSpace = lastChar ? " " : "";
 
-    if (style === "hyperlink") {
-      startCode = '[code]<a href="" target="_blank">';
-      endCode = '</a>[/code]';
-      selectionEnd = start + startCode.indexOf('"') + 1;
-    } else if (style === "miniHyperlink") {
-      startCode = '<a href="';
-      endCode = '"></a>';
-    } else if (style === "bold") {
-      startCode = "[code]<b>";
-      endCode = "</b>[/code]";
-    } else if (style === "italic") {
-      startCode = "[code]<i>";
-      endCode = "</i>[/code]";
-    } else if (style === "image") {
-      startCode = `[code]<img src="`;
-      endCode = `" width=600px />[/code]`;
-    } else if (style === "miniImage") {
-      startCode = `<img src="`;
-      endCode = `" width=600px />`;
-    } else if (style === "orderedList") {
-      startCode = "[code]\n<ol>\n<li>\n";
-      endCode = "\n</li>\n</ol>\n[/code]";
-    } else if (style === "unorderedList") {
-      startCode = "[code]\n<ul>\n<li>\n";
-      endCode = "\n</li>\n</ul>\n[/code]";
-    } else if (style === "code") {
-      startCode = "[code]<code style='display: inline-block; border: 0.5px solid #BBBBBB; border-radius: 1px; background-color: #E5E5E5; padding: 5px; margin-left: 3px; margin-right: 2px;'>";
-      endCode = "</code>[/code]";
-    } else if (style === "miniCode") {
-      startCode = "<code style='display: inline-block; border: 0.5px solid #BBBBBB; border-radius: 1px; background-color: #E5E5E5; padding: 5px; margin-left: 3px; margin-right: 2px;'>";
-      endCode = "</code>";
-    } else if (style === "blockquote") {
-      startCode = "[code]<blockquote style='border-left: 3px solid #00629B; padding: 1em;'>\n<p style='white-space: pre-wrap; margin: 0;'>";
-      endCode = "</p>\n</blockquote>[/code]";
-    } else if (style === "listItem") {
-      startCode = "<li>\n";
-      endCode = "\n</li>";
+    var startCode, endCode, selectionEnd = -1;
+    if (!Object.keys(replacements).includes(command)) {
+      return;
     }
-    if (selectionEnd === -1) {
+
+    const replacement = replacements[command];
+    startCode = replacement.startCode;
+    endCode = replacement.endCode;
+
+    if (Object.keys(replacement).includes(selectionEnd)) {
+      selectionEnd = start + replacement.selectionEnd;
+    } else {
       selectionEnd =
         end - start > 0 ?
           end + startCode.length + endCode.length :
