@@ -64,7 +64,7 @@
     startCode = replacement.startCode;
     endCode = replacement.endCode;
 
-    if (Object.keys(replacement).includes(selectionEnd)) {
+    if (Object.keys(replacement).includes("selectionEnd")) {
       selectionEnd = start + replacement.selectionEnd;
     } else {
       selectionEnd =
