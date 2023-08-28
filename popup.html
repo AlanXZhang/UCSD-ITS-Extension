@@ -2,17 +2,33 @@
 <html>
 
 <head>
-  <link rel="stylesheet" href="popup.css">
+    <link rel="stylesheet" href="popup.css">
 </head>
 
 <body>
-  <h1>Shortcuts</h1>
-  <ul class="shortcuts">
-    <li><strong>Hyperlink</strong>: &#8984;+K or Ctrl + Q (Hold down alt/option to not insert [code] tags)</li>
-    <li><strong>Insert Image</strong>: &#8984;+I or Ctrl + I (Hold down alt/option to not insert [code] tags)</li>
-    <li><strong>Bold</strong>: &#8984;+B or Ctrl + B</li>
-    <li><a href="#" id='shortcutsLink'>Set more shortcuts</a></li>
-  </ul>
+    <h1>Shortcuts</h1>
+    <ul class="shortcuts">
+        <!-- hyperlink: [false, isMacUser ? "k" : "q"],
+      bold: [false, "b"],
+      italic: [false, "i"],
+      image: [true, "i"],
+      orderedList: [false, "o"],
+      unorderedList: [false, "u"],
+      code: [true, "c"],
+      blockquote: [true, "b"],
+      listItem: [true, "l"] -->
+        <li><strong>Bold</strong>: &#8984;+B or Ctrl+B</li>
+        <li><strong>Italic</strong>: &#8984;+I or Ctrl+I</li>
+        <li><strong>Hyperlink</strong>: &#8984;+K or Ctrl+Q</li>
+        <li><strong>Image</strong>: &#8984;+Shift+I or Ctrl+Shift+I</li>
+        <li><strong>Code</strong>: &#8984;+Shift+C or Ctrl+Shift+C</li>
+        <li><strong>Blockquote</strong>: &#8984;+Shift+B or Ctrl+Shift+B</li>
+        <li><strong>Ordered List</strong>: &#8984;+O or Ctrl+O</li>
+        <li><strong>Unordered List</strong>: &#8984;+U or Ctrl+U</li>
+        <li><strong>List Item</strong>: &#8984;+L or Ctrl+L</li>
+        <li><strong>Paragraph</strong>: &#8984;+P or Ctrl+P</li>
+    </ul>
 </body>
 <script src="popup.js"></script>
+
 </html>
