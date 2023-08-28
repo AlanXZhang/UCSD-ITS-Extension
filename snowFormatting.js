@@ -1,5 +1,5 @@
 (() => {
-  const logging = true,
+  const logging = false,
     isMacUser = navigator.userAgent.indexOf("Mac") != -1,
     log = (str) => {
       if (logging) console.log(str);
@@ -90,11 +90,11 @@
     keyDown = (e) => {
       const selection = document.getSelection();
 
-      console.log(selection);
-
       if (
         selection.focusNode !== selection.anchorNode ||
+        selection.focusNode === undefined ||
         selection.focusNode === null ||
+        selection.focusNode.nodeType === 3 ||
         !selection.focusNode.querySelector("textarea,input")
       ) return true;
 
@@ -131,7 +131,5 @@
   }
 
   setTimeout(() => window.addEventListener("keydown", keyDown), 1000);
-
-  console.log("i'm here")
 
 })();
