@@ -5,7 +5,7 @@
       if (logging) console.log(str);
     },
     editHighlighted = function(command, selection) {
-      console.log("in command");
+      log("in command");
       const replacements = {
         hyperlink: (() => {
           const startCode = '[code]<a href="" target="_blank">';
@@ -90,13 +90,15 @@
     keyDown = (e) => {
       const selection = document.getSelection();
 
+      log(selection);
+
       if (
         selection.focusNode !== selection.anchorNode ||
         selection.focusNode === undefined ||
         selection.focusNode === null ||
         selection.focusNode.nodeType === 3 ||
         !selection.focusNode.querySelector("textarea,input")
-      ) return true;
+      ) return;
 
       if (
         (isMacUser && e.metaKey) ||
@@ -110,6 +112,7 @@
           if (comboMatches) {
             e.preventDefault();
             editHighlighted(command, selection);
+            return;
           }
 
         }
