@@ -1,6 +1,7 @@
 (() => {
   const logging = false,
     isMacUser = navigator.userAgent.indexOf("Mac") != -1,
+    confirmProposingSolution = localStorage["its-extension-confirm-proposing-solution"] == '1',
     log = (str) => {
       if (logging) console.log(str);
     },
@@ -93,19 +94,29 @@
       log(selection);
 
       if (
-        selection.focusNode !== selection.anchorNode ||
-        selection.focusNode === undefined ||
-        selection.focusNode === null ||
-        selection.focusNode.nodeType === 3 ||
-        !selection.focusNode.querySelector("textarea,input")
-      ) return;
-
-      if (
         (isMacUser && e.metaKey) ||
         (!isMacUser && e.ctrlKey)
       ) {
         const shiftDown = e.shiftKey,
           letter = e.key.toLowerCase();
+
+        if (letter == 'x' && shiftDown == true) {
+          if (confirm("Are you sure you would like to " + (confirmProposingSolution ? 'disable' : 'enable') + " the confirmation dialog before proposing solution on a ticket?")) {
+            localStorage["its-extension-confirm-proposing-solution"] = !confirmProposingSolution ? '1' : '0';
+            alert('The confirmation dialog has been ' + (confirmProposingSolution ? 'disabled' : 'enabled') + '. Please reload the page for it to take effect.');
+            e.preventDefault();
+            return;
+          }
+        }
+
+        if (
+          selection.focusNode !== selection.anchorNode ||
+          selection.focusNode === undefined ||
+          selection.focusNode === null ||
+          selection.focusNode.nodeType === 3 ||
+          !selection.focusNode.querySelector("textarea,input")
+        ) return;
+
         for (var command in keyCombinations) {
           const combo = keyCombinations[command],
             comboMatches = combo[0] == shiftDown && combo[1] == letter;
@@ -129,10 +140,35 @@
     unorderedList: [false, "u"],
     code: [true, "c"],
     blockquote: [true, "b"],
-    listItem: [true, "l"],
+    listItem: [false, "l"],
     paragraph: [false, "p"]
   }
 
-  setTimeout(() => window.addEventListener("keydown", keyDown), 1000);
+  setTimeout(() => {
+    window.addEventListener("keydown", keyDown);
+    if (Math.floor(Math.random() * 10) === 0) {
+      [].slice.call(document.querySelectorAll('button[data-action-name="saveAndStayCase"]')).forEach((button) => button.innerText = 'Save and Slay');
+    }
+    if (confirmProposingSolution) {
+      [].slice.call(document.querySelectorAll('button[data-action-name="proposeSolution"]'))
+        .forEach(
+          (button) => {
+            button
+              .innerText = 'Propose Solution*'
+            button
+              .setAttribute('onclick', "if(confirm('Are you sure you would like to propose solution on this case?')) " + button.getAttribute('onclick'))
+          }
+        );
+
+      // const originalGsftSubmit = window.gsftSubmit ?? function() { };
+      // window.gsftSubmit = function() {
+      //   if (confirm()) {
+      //     originalGsftSubmit.apply(null, arguments);
+      //   }
+      // };
+    }
+  }, 500);
+
+  window.confirmProposingSolution = confirmProposingSolution;
 
 })();
