@@ -1,40 +1,26 @@
 {
   "name": "ITS Helper",
   "description": "Copy DSA tables; rich text hotkeys; collapse SNOW email quotes",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "manifest_version": 3,
-  "permissions": [
-    "scripting"
-  ],
+  "permissions": ["scripting"],
   "action": {
     "default_popup": "popup.html"
   },
-  "host_permissions": [
-    "https://support.ucsd.edu/*",
-    "https://snqa.ucsd.edu/*"
-  ],
+  "host_permissions": ["https://support.ucsd.edu/*", "https://snqa.ucsd.edu/*"],
   "icons": {
     "128": "resnet_logo.png"
   },
   "web_accessible_resources": [
     {
-      "resources": [
-        "copy.png"
-      ],
-      "matches": [
-        "http://*.ucsd.edu/*",
-        "https://*.ucsd.edu/*"
-      ]
+      "resources": ["copy.png"],
+      "matches": ["http://*.ucsd.edu/*", "https://*.ucsd.edu/*"]
     }
   ],
   "content_scripts": [
     {
-      "css": [
-        "dsaStyles.css"
-      ],
-      "js": [
-        "dsaSearch.js"
-      ],
+      "css": ["dsaStyles.css"],
+      "js": ["dsaSearch.js"],
       "matches": [
         "https://iam.ucsd.edu/dsasearch/",
         "https://iam.ucsd.edu/dsasearch/dsaSearchByEmail*",
@@ -42,10 +28,7 @@
       ]
     },
     {
-      "js": [
-        "snowCollapse.js",
-        "snowFormatting.js"
-      ],
+      "js": ["snowCollapse.js", "snowFormatting.js"],
       "matches": [
         "https://support.ucsd.edu/*",
         "https://snqa.ucsd.edu/*",
